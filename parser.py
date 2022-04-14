@@ -35,7 +35,7 @@ def get_pages_count(html):
         return 1
 
 
-# Поулчаем необходимый контент
+# Получаем необходимый контент
 def get_content(html):
     soup = BeautifulSoup(html, 'lxml')
     items = soup.find_all('div', class_='anekdot-text')
@@ -52,7 +52,7 @@ def get_content(html):
     return anekdot
 
 
-# Сохраняем всё в csv файл
+# Сохраняем всё в .csv файл
 def save_file(items, path):
     with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
@@ -65,6 +65,7 @@ def save_file(items, path):
 def parse():
     URL = input('Введите URL: ')
     html = get_html(URL)
+    # Проверка работоспособности
     if html.status_code == 200:
         anekdot = []
         pages_count = get_pages_count(html.text)
